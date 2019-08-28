@@ -1,6 +1,6 @@
-Bluemix = {};
+Ibmcloud = {};
 
-OAuth.registerService('bluemix', 2, null, function(query) {
+OAuth.registerService('ibmcloud', 2, null, function(query) {
 
   var data = getAccessToken(query);
   console.log(data);
@@ -30,14 +30,14 @@ if (Meteor.release)
   userAgent += "/" + Meteor.release;
 
 var getAccessToken = function (query) {
-  var config = ServiceConfiguration.configurations.findOne({service: 'bluemix'});
+  var config = ServiceConfiguration.configurations.findOne({service: 'ibmcloud'});
   if (!config)
     throw new ServiceConfiguration.ConfigError();
    
   var basicAuth = 'Basic ' + new Buffer(config.clientId + ':' + config.secret).toString('base64');
-  var redirectUri = config.redirectUri || OAuth._redirectUri('bluemix', config);
+  var redirectUri = config.redirectUri || OAuth._redirectUri('ibmcloud', config);
   var response;
-  var tokenUrl = config.tokenUrl || "https://uaa.eu-gb.bluemix.net/oauth/token";
+  var tokenUrl = config.tokenUrl;
   try {
     response = HTTP.post(
         tokenUrl, {
@@ -56,11 +56,11 @@ var getAccessToken = function (query) {
         }
       });
   } catch (err) {
-    throw _.extend(new Error("Failed to complete OAuth handshake with Bluemix. " + err.message),
+    throw _.extend(new Error("Failed to complete OAuth handshake with IBM Cloud. " + err.message),
                    {response: err.response});
   }
   if (response.data.error) { // if the http response was a json object with an error attribute
-    throw new Error("Failed to complete OAuth handshake with Bluemix. " + response.data.error);
+    throw new Error("Failed to complete OAuth handshake with IBM Cloud. " + response.data.error);
   } else {
     return response.data;
   }
@@ -68,20 +68,20 @@ var getAccessToken = function (query) {
 
 var getIdentity = function (accessToken) {
   // get the config
-  var config = ServiceConfiguration.configurations.findOne({service: 'bluemix'});
+  var config = ServiceConfiguration.configurations.findOne({service: 'ibmcloud'});
   if (!config)
     throw new ServiceConfiguration.ConfigError();
 
   try {
-    var userInfoUrl = config.userInfoUrl || "https://uaa.eu-gb.bluemix.net/userinfo";
+    var userInfoUrl = config.userInfoUrl;
     var url = userInfoUrl + "?access_token=" + accessToken;
     return JSON.parse(HTTP.get(url).content);
   } catch (err) {
-    throw _.extend(new Error("Failed to fetch identity from Bluemix. " + err.message),
+    throw _.extend(new Error("Failed to fetch identity from IBM Cloud. " + err.message),
                    {response: err.response});
   }
 };
 
-Bluemix.retrieveCredential = function(credentialToken, credentialSecret) {
+Ibmcloud.retrieveCredential = function(credentialToken, credentialSecret) {
   return OAuth.retrieveCredential(credentialToken, credentialSecret);
 };

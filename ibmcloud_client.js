@@ -1,18 +1,18 @@
-Bluemix = {};
+Ibmcloud = {};
 
-// Request Bluemix credentials for the user
+// Request IBM cloud credentials for the user
 // @param options {optional}
 // @param credentialRequestCompleteCallback {Function} Callback function to call on
 //   completion. Takes one argument, credentialToken on success, or Error on
 //   error.
-Bluemix.requestCredential = function (options, credentialRequestCompleteCallback) {
+Ibmcloud.requestCredential = function (options, credentialRequestCompleteCallback) {
   // support both (options, callback) and (callback).
   if (!credentialRequestCompleteCallback && typeof options === 'function') {
     credentialRequestCompleteCallback = options;
     options = {};
   }
 
-  var config = ServiceConfiguration.configurations.findOne({service: 'bluemix'});
+  var config = ServiceConfiguration.configurations.findOne({service: 'ibmcloud'});
   if (!config) {
     credentialRequestCompleteCallback && credentialRequestCompleteCallback(
       new ServiceConfiguration.ConfigError());
@@ -24,10 +24,9 @@ Bluemix.requestCredential = function (options, credentialRequestCompleteCallback
   //var scope = (options && options.requestPermissions) || ['profile'];
   var flatScope = _.map(scope, encodeURIComponent).join('+');
 
-  var loginStyle = OAuth._loginStyle('bluemix', config, options);
-  var redirectUri = config.redirectUri || OAuth._redirectUri('bluemix', config);
-  console.log('redirectUri',redirectUri)
-  var url = config.loginUrl || 'https://login.eu-gb.bluemix.net/UAALoginServerWAR/oauth/authorize';
+  var loginStyle = OAuth._loginStyle('ibmcloud', config, options);
+  var redirectUri = config.redirectUri || OAuth._redirectUri('ibmcloud', config);
+  var url = config.loginUrl;
 
   var loginUrl = url  +
     '?client_id=' + config.clientId +
@@ -37,7 +36,7 @@ Bluemix.requestCredential = function (options, credentialRequestCompleteCallback
     '&state=' + OAuth._stateParam(loginStyle, credentialToken);
 
   OAuth.launchLogin({
-    loginService: "bluemix",
+    loginService: "ibmcloud",
     loginStyle: loginStyle,
     loginUrl: loginUrl,
     credentialRequestCompleteCallback: credentialRequestCompleteCallback,

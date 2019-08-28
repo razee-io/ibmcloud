@@ -1,10 +1,10 @@
-Template.configureLoginServiceDialogForBluemix.helpers({
+Template.configureLoginServiceDialogForIbmcloud.helpers({
   siteUrl: function () {
     return Meteor.absoluteUrl();
   }
 });
 
-Template.configureLoginServiceDialogForBluemix.fields = function () {
+Template.configureLoginServiceDialogForIbmcloud.fields = function () {
   return [
     {property: 'clientId', label: 'Client ID'},
     {property: 'secret', label: 'Client Secret'}

@@ -1,8 +1,8 @@
 Package.describe({
-  name: 'ibmcloud:bluemix',
-  version: '1.0.4',
-  summary: 'IBM Bluemix OAuth flow',
-  git: 'https://github.com/oneibmcloud/bluemix.git',
+  name: 'razee-io:ibmcloud',
+  version: '0.1.0',
+  summary: 'IBM Cloud OAuth flow',
+  git: 'https://github.com/razee-io/ibmcloud.git',
   documentation: 'README.md'
 });
 
@@ -15,10 +15,10 @@ Package.onUse(function(api) {
   api.use('random@1.0.0', 'client');
   api.use('service-configuration@1.0.0', ['client', 'server']);
 
-  api.export('Bluemix');
+  api.export('Ibmcloud');
 
-  api.addFiles(['bluemix_configure.html', 'bluemix_configure.js'], 'client');
+  api.addFiles(['ibmcloud_configure.html', 'ibmcloud_configure.js'], 'client');
 
-  api.addFiles('bluemix_server.js', 'server');
-  api.addFiles('bluemix_client.js', 'client');
+  api.addFiles('ibmcloud_server.js', 'server');
+  api.addFiles('ibmcloud_client.js', 'client');
 });

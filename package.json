@@ -1,18 +1,18 @@
 {
-  "name": "bluemix",
-  "version": "1.0.4",
-  "description": "IBM Bluemix OAuth flow",
+  "name": "ibmcloud",
+  "version": "0.1.0",
+  "description": "IBM Cloud OAuth flow",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oneibmcloud/bluemix.git"
+    "url": "git+https://github.com/razee-io/ibmcloud.git"
   },
   "author": "IBM",
-  "license": "ISC",
+  "license": "Apache 2.0",
   "bugs": {
-    "url": "https://github.com/oneibmcloud/bluemix/issues"
+    "url": "https://github.com/razee-io/ibmcloud/issues"
   },
-  "homepage": "https://github.com/oneibmcloud/bluemix#readme"
+  "homepage": "https://github.com/razee-io/ibmcloud#readme"
 }
