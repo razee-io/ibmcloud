@@ -1,12 +1,13 @@
+/* eslint-disable no-undef */
 Template.configureLoginServiceDialogForIbmcloud.helpers({
-  siteUrl: function () {
-    return Meteor.absoluteUrl();
-  }
+    siteUrl: function () {
+        return Meteor.absoluteUrl();
+    }
 });
 
 Template.configureLoginServiceDialogForIbmcloud.fields = function () {
-  return [
-    {property: 'clientId', label: 'Client ID'},
-    {property: 'secret', label: 'Client Secret'}
-  ];
+    return [
+        {property: 'clientId', label: 'Client ID'},
+        {property: 'secret', label: 'Client Secret'}
+    ];
 };
